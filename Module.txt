@@ -1,0 +1,12 @@
+﻿Name: ContentTree
+AntiForgery: enabled
+Author: Charlie Drewitt (for Bath Spa University)
+Website: https://bitbucket.org/bathspauniversity/orchard.contenttree
+Version: 1.0.2
+OrchardVersion: 1.7
+Description: Adds a content tree view to the admin, based on a URL (Autoroute) heirarchy.
+Category: Content
+Dependencies: Orchard.ContentTypes, Orchard.jQuery, Orchard.Autoroute
+Features:
+    Orchard.ContentTree:
+        Description: Adds a content tree view to the admin, based on a URL (Autoroute) heirarchy.
