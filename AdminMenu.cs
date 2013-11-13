@@ -11,10 +11,9 @@ namespace Orchard.ContentTree {
         public string MenuName { get { return "admin"; } }
 
         public void GetNavigation(NavigationBuilder builder) {
-            builder.Add(T("Content"),
-                menu => menu
-                    .Add(T("Content Tree"), "1.1", item => item.Action("ContentTree", "Admin", new { area = "Orchard.ContentTree" }))
-                    .Add(T("Content Tree"), "1.1", item => item.Action("ContentTree", "Admin", new { area = "Orchard.ContentTree" }).LocalNav()));
+            builder.AddImageSet("content-tree")
+                .Add(T("Content Tree"), "1.4.0.1", menu => menu
+                    .Add(T("Content Tree"), "2", item => item.Action("ContentTree", "Admin", new { area = "Orchard.ContentTree" }).LocalNav()));
 
             builder.Add(T("Settings"), "99", menu => menu.
                 Add(T("Content Tree"), "5", item => item.Action("Settings", "Admin", new { area = "Orchard.ContentTree" })));

@@ -5,8 +5,6 @@
     Layout.Title = "Content Tree";
 }
 <fieldset class="content-tree-fields">
-    <legend>@T("Content Tree")</legend>
-    <p class="hint">@T("The content tree only shows items which have a route (URL).")</p>
     <div class="content-tree-clear"></div>
     <div class="content-tree-key">
         <div class="left-column">
@@ -23,13 +21,14 @@
         <a href="#" class="button primaryAction Toggle_Editable">Show only items I can edit</a>
         <a href="#" class="button primaryAction Expand_All">Expand All</a>
         <a href="#" class="button primaryAction Collapse_All">Collapse All</a>
+        @Html.ActionLink(T("Create New Content").Text, "Create", new { Area = "Contents", Id = "" }, new { @class = "button primaryAction" })
     </div>
     <div class="content-tree-clear"></div>
     <div class="content-tree">
         <p class="content-tree-spinner">@T("Loading content tree...")</p>
         <p class="hint">This can sometimes take a short while, depending on the number of content items in the site.</p> 
     </div>
-    
+    <p class="hint">@T("TIP: The content tree only shows items which have a route (URL).")</p>
 </fieldset>
 
 

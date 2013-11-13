@@ -30,32 +30,32 @@ namespace Orchard.ContentTree
                 new RouteDescriptor {
                     Priority = 0,
                     Route = new Route(
-                        "Admin/Contents/ContentTree",
+                        "Admin/ContentTree",
                         new RouteValueDictionary {
                             {"area", areaName},
-                            {"controller", "Admin"},
                             {"action", "ContentTree"},
+                            {"controller", "Admin"},
                         },
                         emptyConstraints, sliderRouteValueDictionary, mvcRouteHandler)
                 },
                 new RouteDescriptor {
                     Priority = 0,
                     Route = new Route(
-                        "Admin/Contents/ContentTreeAsync",
+                        "Admin/ContentTreeAsync",
                         new RouteValueDictionary {
                             {"area", areaName},
-                            {"controller", "Admin"},
                             {"action", "ContentTreeAsync"},
+                            {"controller", "Admin"},
                         },
                         emptyConstraints, sliderRouteValueDictionary, mvcRouteHandler)
                 },
                 new RouteDescriptor {
                     Route = new Route(
-                        "Admin/Contents/ContentTree/SaveActions",
+                        "Admin/ContentTree/SaveActions",
                         new RouteValueDictionary {
                             {"area", areaName},
-                            {"controller", "Admin"},
                             {"action", "SaveActions"},
+                            {"controller", "Admin"},
                         },
                         emptyConstraints, sliderRouteValueDictionary, mvcRouteHandler)
                 }
