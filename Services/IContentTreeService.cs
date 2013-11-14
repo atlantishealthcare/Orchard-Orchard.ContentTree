@@ -40,7 +40,7 @@ namespace Orchard.ContentTree.Services {
         }
 
         public ContentTreeItem BuildTree() {
-            //Get All Routed Content
+            //Get all routed content, of the types selected in settings.
             var content = _contentManager.
                 Query<AutoroutePart, AutoroutePartRecord>(GetSettings().IncludedTypes).
                 ForVersion(VersionOptions.Latest).
@@ -55,7 +55,7 @@ namespace Orchard.ContentTree.Services {
                 return null;
             }
 
-            //Create a flattened tree, and add placeholder items where required.
+            //Create a flat tree, and add placeholder items where required in order to preserve structure.
             var flat = new Dictionary<string, ContentTreeItem>();
 
             foreach (var item in content.OrderBy(i => i.DisplayAlias)) {
@@ -68,7 +68,7 @@ namespace Orchard.ContentTree.Services {
                     var parts = branch.Path.Split('/');
 
                     for (int i = 1; i < branch.Level; i++) {
-                        var ancestorPath = (String.Join("/", parts.Take(i)));
+                        var ancestorPath = String.Join("/", parts.Take(i));
 
                         if (!flat.ContainsKey(ancestorPath)) {
                             flat.Add(ancestorPath, CreatePlaceholder(i, ancestorPath));
@@ -118,7 +118,7 @@ namespace Orchard.ContentTree.Services {
 
             if (tree.Content == null) {
                 shape = _shapeFactory.Parts_TreePlaceholder(
-                    Title: String.Format("{0}*", tree.Title),
+                    Title: String.Format("{0}", tree.Title),
                     Path: tree.Path,
                     Level: tree.Level,
                     Editable: false
@@ -147,6 +147,7 @@ namespace Orchard.ContentTree.Services {
             var viewResult = engine.FindPartialView(context, viewName, false);
 
             if (viewResult.View == null) {
+                
                 throw new Exception("Couldn't find view " + viewName);
             }
 
@@ -202,8 +203,10 @@ namespace Orchard.ContentTree.Services {
             }
         }
 
+        #region Private Utility Methods
+
         private ContentTreeItem GetHomepageTreeItem() {
-            var homepage = _contentManager.Query<AutoroutePart, AutoroutePartRecord>("Page").Where<AutoroutePartRecord>(r => r.DisplayAlias.Equals(String.Empty)).Slice(0, 1).FirstOrDefault();
+            var homepage = _contentManager.Query<AutoroutePart, AutoroutePartRecord>().Where<AutoroutePartRecord>(r => r.DisplayAlias.Equals(String.Empty)).Slice(0, 1).FirstOrDefault();
 
             if (homepage == null) {
                 throw new InvalidOperationException("Homepage content item was not found.");
@@ -231,7 +234,7 @@ namespace Orchard.ContentTree.Services {
             };
         }
 
-        //Don't think this is the right 'Orchard' way to do this, but it works. Would welcome input on a more correct way.
+        //CD: Feels like this isn't the right 'Orchard' way to do this, but it works. Would welcome input on a more correct way.
         private RazorViewEngine CreatePartViewEngine() {
             string[] areaFormats = new string[] 
             { 
@@ -247,6 +250,8 @@ namespace Orchard.ContentTree.Services {
                 AreaPartialViewLocationFormats = areaFormats,
             };
         }
+
+        #endregion
     }
 
     public static class ContentTreeExtensions {
