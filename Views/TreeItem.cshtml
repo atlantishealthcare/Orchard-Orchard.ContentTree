@@ -11,9 +11,7 @@
     string unpublished = (hasDraft | !hasPublished) ? "Unpublished" : "";
     string noEdit = Model.Editable ? "" : "no-edit";
     string noHide = Model.NoHide ? "" : "can-hide";
-
 }
-
 @if (hasChildren) {
     <a href="#" class="tree-expando @if(Model.Level > 0) { <text>closed</text> }"></a>
 }

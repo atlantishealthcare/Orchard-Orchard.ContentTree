@@ -84,10 +84,10 @@
     <Content Include="Properties\AssemblyInfo.cs" />
     <Content Include="Module.txt" />
     <Content Include="Views\Admin\Settings.cshtml" />
-    <Content Include="Views\Parts\TreeItem.cshtml" />
-    <Content Include="Views\Parts\TreePlaceholder.cshtml" />
-    <Content Include="Views\Parts\TreeItemActions.cshtml" />
+    <Content Include="Views\TreeItem.cshtml" />
+    <Content Include="Views\TreePlaceholder.cshtml" />
     <Content Include="Views\Admin\ContentTreePartial.cshtml" />
+    <Content Include="Views\TreeItemActions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Orchard.Core">

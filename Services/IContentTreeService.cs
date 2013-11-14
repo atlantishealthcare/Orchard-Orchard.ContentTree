@@ -117,7 +117,7 @@ namespace Orchard.ContentTree.Services {
             dynamic shape;
 
             if (tree.Content == null) {
-                shape = _shapeFactory.Parts_TreePlaceholder(
+                shape = _shapeFactory.TreePlaceholder(
                     Title: String.Format("{0}", tree.Title),
                     Path: tree.Path,
                     Level: tree.Level,
@@ -125,13 +125,13 @@ namespace Orchard.ContentTree.Services {
                 );
             } 
             else {
-                shape = _shapeFactory.Parts_TreeItem(
+                shape = _shapeFactory.TreeItem(
                     Content: tree.Content,
                     Title: String.Format("{0} ({1})", tree.Title, tree.Content.ContentItem.ContentType),
                     Path: tree.Path,
                     Level: tree.Level,
                     Editable: _treePermissionProviders.All(p => p.Editable(tree.Content)),
-                    Actions: _shapeFactory.Parts_TreeItemActions(ContentPart: tree.Content, HasChildren: tree.Children.Count > 0)
+                    Actions: _shapeFactory.TreeItemActions(ContentPart: tree.Content, HasChildren: tree.Children.Count > 0)
                 );
             }
 
@@ -142,12 +142,11 @@ namespace Orchard.ContentTree.Services {
         }
 
         public string Render(ControllerContext context, TempDataDictionary temp, string viewName, object model) {
-            var engine = CreatePartViewEngine();
+            var engine = CreateTreeShapeViewEngine();
 
             var viewResult = engine.FindPartialView(context, viewName, false);
 
             if (viewResult.View == null) {
-                
                 throw new Exception("Couldn't find view " + viewName);
             }
 
@@ -235,10 +234,9 @@ namespace Orchard.ContentTree.Services {
         }
 
         //CD: Feels like this isn't the right 'Orchard' way to do this, but it works. Would welcome input on a more correct way.
-        private RazorViewEngine CreatePartViewEngine() {
-            string[] areaFormats = new string[] 
-            { 
-                "~/Modules/{2}/Views/Parts/{0}.cshtml"
+        private RazorViewEngine CreateTreeShapeViewEngine() {
+            string[] areaFormats = new string[] { 
+                "~/Modules/{2}/Views/{0}.cshtml"
             };
 
             return new RazorViewEngine {

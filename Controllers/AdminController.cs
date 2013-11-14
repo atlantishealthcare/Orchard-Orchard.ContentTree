@@ -34,11 +34,10 @@ namespace Orchard.ContentTree.Controllers {
         }
 
         public ActionResult ContentTreeAsync() {
-            var treeModel = _contentTreeService.BuildTree();
+            var tree = _contentTreeService.BuildTree();
 
-            var viewModel = new ContentTreeViewModel
-            {
-                Tree = _contentTreeService.Display(treeModel)
+            var viewModel = new ContentTreeViewModel {
+                Tree = _contentTreeService.Display(tree)
             };
 
             return PartialView("ContentTreePartial", viewModel);
