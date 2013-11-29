@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\orchard.contentree.js" />
-    <None Include="Views\Admin\ContentTree.cshtml" />
+    <Content Include="Views\Admin\ContentTree.cshtml" />
     <Content Include="Styles\images\menu.contenttree.png" />
     <Content Include="Styles\loading.gif" />
     <Content Include="Styles\menu.contenttree-admin.css" />
